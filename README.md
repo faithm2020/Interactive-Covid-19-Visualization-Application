@@ -1,4 +1,4 @@
-# F2xDV Group Project Template
+# F21DV Group Project Template
 
 This starter project contains a basic web application template for your group project.
 
