@@ -15,7 +15,13 @@
     <section class="visualisation-3">
         <div>
             <h6>Stacked-bar Chart</h6>
-            <div id="stacked-bar"></div>
+            <div>
+                <label for="country-select">Select a country:</label>
+                <select id="country-select"></select>
+            </div>
+            <div id="chart-container">
+                <!-- Stacked bar chart will be inserted here -->
+            </div>
         </div>
     </section>
 
@@ -28,6 +34,6 @@
 
     <script type="module" src="scripts/main.js"></script>
     <script src="scripts/doublebar.js"></script>
-    <script src="scripts/stackedbar.js"></script>
+    <script src="scripts/stackedbar.js" defer></script>
 </body>
 </html>
