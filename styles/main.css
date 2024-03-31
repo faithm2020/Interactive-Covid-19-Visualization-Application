@@ -11,10 +11,3 @@
     align-items: center;
 }
 
-.sub-title4 {
-    width: 43%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
