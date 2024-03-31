@@ -10,7 +10,27 @@
 </head>
 <body>
     
-    <div id="app"></div>
+    <section class="section-1">  
+
+        <div class="map">
+            <p class="map-title">Covid-19 spread around the world </p>
+            <select id="data-select">
+                <option value="cases">Cases</option>
+                <option value="deaths">Deaths</option>
+                <option value="vaccines">Vaccines</option>
+            </select>
+            <div id="map-viz">
+            </div>
+            <p class="map-bottom">Severity of Covid-19 cases by country. The darker, the worse that specific country handled covid.</p>
+        </div>
+
+        <div class="sub-section-right">
+            <div class="search-container">
+                <input type="text" id="country-input" placeholder="Enter country name...">
+                <button id="search-btn">Search</button>
+            </div>
+            <div id="line-viz"></div>
+        </div>
 
     <section class="visualisation-3">
         <div>
@@ -32,6 +52,11 @@
         </div>
     </section>  
 
+
+    <div id="app"></div>
+
+    <script src="scripts/map.js"></script>
+    <script src="scripts/line.js"></script>
     <script type="module" src="scripts/main.js"></script>
     <script src="scripts/doublebar.js"></script>
     <script src="scripts/stackedbar.js" defer></script>
