@@ -2,3 +2,19 @@
     color: #222;
     font-family: sans-serif;
 }
+
+.visualisation-4 {
+    height: 100vh;
+    padding: 2em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sub-title4 {
+    width: 43%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
