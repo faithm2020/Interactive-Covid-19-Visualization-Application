@@ -1,7 +1,6 @@
-//to load the dataset from the provided document
 //d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv").then(data => {
-
-const data = [
+//to load the dataset from the provided document
+    const data = [
     {location: 'Afghanistan', population_density: 54.422, total_tests_per_thousand: 26.319},
     {location: 'Albania', population_density: 104.871, total_tests_per_thousand: 21.852},
     {location: 'Algeria', population_density: 17.348, total_tests_per_thousand: 17.025},
