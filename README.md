@@ -1,20 +1,11 @@
-# F20DV Group Project Template
+# F20DV Group 12 COVID-19 DATA VISUALIZATION
 
 This starter project contains a basic web application template for your group project.
 
 To do list:
- - [ ] One group member forks this project.
- - [ ] That same group member invites others to collaborate.
- - [ ] Each group member sets up their access to GitLab: SSH keygen; clone repo; configuration git user.email
+ - [x] One group member forks this project.
+ - [x] That same group member invites others to collaborate.
+ - [x] Each group member sets up their access to GitLab: SSH keygen; clone repo; configuration git user.email
 
 Remember to keep this README file updated as you develop your interactive data visualisation dashboard.
 
-Artho - Test
-
-Merge Request - Test
-Faith Branch Test - Test
-
-FAvour commit - test
-favour branch and merge test 2
-
-hbhbk
