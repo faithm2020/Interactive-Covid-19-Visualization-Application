@@ -142,8 +142,8 @@ function lineGraph(data) {
     //     });
 }
 // Initial call for world data
-// const worldData = mainData.filter(d => d.location === 'World');
-// lineGraph(worldData);
+//const worldData = mainData.filter(d => d.location === 'World');
+//lineGraph(worldData);
 
 document.getElementById("search-btn").addEventListener("click", function() {
     // Get the input value
