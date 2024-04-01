@@ -1,4 +1,3 @@
-
 //to load the dataset from the provided document
 //d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv").then(data => {
 
