@@ -22,11 +22,15 @@ d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/
     mainData = data;
     continentData = data.filter(d => d.date === "2023-03-07" && ['OWID_AFR','OWID_ASI','OWID_EUR','OWID_NAM','OWID_OCE','OWID_SAM'].includes(d.iso_code));
 
+    // Initial call for world data
+    const worldData = mainData.filter(d => d.location === 'World');
+    lineGraph(worldData);
+
 });
 
 const mapPath = d3.geoPath();
 const projection = d3.geoMercator()
-  .scale(125)
+  .scale(100)
   .center([0,20])
   .translate([ window.innerWidth * mapWidth / 200 , window.innerHeight * mapHeight / 200]);
 
