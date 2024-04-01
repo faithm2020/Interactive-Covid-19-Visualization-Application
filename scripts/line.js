@@ -120,7 +120,7 @@ function lineGraph(data) {
         .style("font-size", "0.95em")
         .style("fill", "black")
         .text(() => {
-            return "Growth of Covid-19 overtime: " + data[0].location;
+            return "Growth of Covid-19 cases & deaths overtime: " + data[0].location;
         });
 
     //Country search 

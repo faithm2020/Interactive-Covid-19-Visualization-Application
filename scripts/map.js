@@ -15,17 +15,17 @@ const mapSvg = d3.select("#map-viz")
 // Map and projection
 
 let mainData;
-let continentData;
+let countryData;
 
 d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv").then(data => {
 
     mainData = data;
-    continentData = data.filter(d => d.date === "2023-03-07" && ['OWID_AFR','OWID_ASI','OWID_EUR','OWID_NAM','OWID_OCE','OWID_SAM'].includes(d.iso_code));
+    countryData = data.filter(d => d.date === "2023-03-07" && ['AFG','ALB','DZA','ASM','CAN'].includes(d.iso_code));
 
     // Initial call for world data
     const worldData = mainData.filter(d => d.location === 'World');
     lineGraph(worldData);
-    stackBarGraph(continentData);
+    stackBarGraph(countryData);
 });
 
 const mapPath = d3.geoPath();
