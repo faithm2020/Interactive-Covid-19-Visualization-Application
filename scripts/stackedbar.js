@@ -1,90 +1,90 @@
-// Load data and populate dropdown
-d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv").then(function(data) {
-    const countries = Array.from(new Set(data.map(d => d.location)));
-    const dropdown = d3.select("#country-select");
-    dropdown.selectAll("option")
-        .data(countries)
-        .enter().append("option")
-        .text(d => d)
-        .attr("value", d => d);
-});
+// Set dimensions and margins
+const stackedBarMargin = {top: 25, right: 70, bottom: 40, left: 50};
+const stackedBarWidth = 600 - stackedBarMargin.left - stackedBarMargin.right;
+const stackedBarHeight = 400 - stackedBarMargin.top - stackedBarMargin.bottom;
 
-// Function to create stacked bar chart
-function createStackedBarChart(selectedCountry) {
-    // Clear previous chart
-    d3.select("#chart-container").html("");
-
-    // Filter data for the selected country
-    const countryData = data.filter(d => d.location === selectedCountry);
-
-    // Extract necessary data for the chart
-    const casesPerMillion = +countryData[0].total_cases_per_million;
-    const totalCases = +countryData[0].total_cases;
-    const population = +countryData[0].population;
-
-    // Create stacked bar chart data
-    const stackedData = [
-        { name: "COVID Cases", value: casesPerMillion },
-        { name: "Non-COVID Cases", value: population - casesPerMillion }
-    ];
-
-    // Set up dimensions for the chart
-    const width = 600;
-    const height = 400;
-
-    // Create SVG element
-    const svg = d3.select("#chart-container")
+function stackBarGraph(data) {
+    // Append SVG container
+    const stackedBarSVG = d3.select("#chart-container")
         .append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", stackedBarWidth + stackedBarMargin.left + stackedBarMargin.right)
+        .attr("height", stackedBarHeight + stackedBarMargin.top + stackedBarMargin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + stackedBarMargin.left + "," + stackedBarMargin.top + ")");
 
-    // Set up scales for x and y axes
-    const xScale = d3.scaleBand()
-        .domain(stackedData.map(d => d.name))
-        .range([0, width])
+    // Define scales
+    const yScale = d3.scaleBand()
+        .domain(data.map(d => d.location))
+        .range([0, stackedBarHeight])
         .padding(0.1);
 
-    const yScale = d3.scaleLinear()
-        .domain([0, population])
-        .range([height, 0]);
+    const xAxisTop = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.population_density)])
+        .range([0, stackedBarWidth]);
 
-    // Create color scale
-    const color = d3.scaleOrdinal()
-        .domain(stackedData.map(d => d.name))
-        .range(["#98abc5", "#8a89a6"]);
-
-    // Add bars to the chart
-    svg.selectAll(".bar")
-        .data(stackedData)
+    const xAxisBottom = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.total_deaths_per_million)])
+        .range([0, stackedBarWidth]);
+    
+    // Create stacked bars
+    stackedBarSVG.selectAll(".stacked-bar-total-population_density")
+        .data(data)
         .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", d => xScale(d.name)) // x position based on category name
-        .attr("y", d => yScale(d.value)) // y position based on value
-        .attr("width", xScale.bandwidth()) // width of the bars
-        .attr("height", d => height - yScale(d.value)) // height of the bars
-        .style("fill", d => color(d.name)); // color based on category name
+        .attr("class", "stacked-bar-total-population_density")
+        .attr("x", 0)
+        .attr("y", d => yScale(d.location))
+        .attr("width", d => xAxisTop(d.population_density))
+        .attr("height", yScale.bandwidth())
+        .attr("fill", "steelblue")
+        .append("title")
+        .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_deaths_per_million}`);
 
-    // Add y-axis
-    svg.append("g")
-        .attr("class", "y-axis")
+    stackedBarSVG.selectAll(".stacked-bar-total-cases-per-million")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "stacked-bar-total-cases-per-million")
+        .attr("x", 0)
+        .attr("y", d => yScale(d.location))
+        .attr("width", d => xAxisBottom(d.total_deaths_per_million))
+        .attr("height", yScale.bandwidth())
+        .attr("fill", "orange")
+        .append("title")
+        .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_deaths_per_million}`);
+
+    // Add axes and labels
+    stackedBarSVG.append("g")
         .call(d3.axisLeft(yScale));
 
-    // Add x-axis
-    svg.append("g")
-        .attr("class", "x-axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xScale));
+    const xAxisTopGroup = stackedBarSVG.append("g")
+        .attr("transform", "translate(0, 0)")
+        .call(d3.axisTop(xAxisTop));
 
-    // Add chart title
-    svg.append("text")
-        .attr("x", width / 2)
-        .attr("y", 20)
-        .attr("text-anchor", "middle")
-        .text("Cases per Million compared to Total Population");
-}
+    const xAxisBottomGroup = stackedBarSVG.append("g")
+        .attr("transform", "translate(0," + stackedBarHeight + ")")
+        .call(d3.axisBottom(xAxisBottom));
 
-// Event handler for dropdown change
-d3.select("#country-select").on("change", function() {
-    const selectedCountry = d3.select(this).property("value");
-    createStackedBarChart(selectedCountry);
-});
+    // Add Y axis label
+    stackedBarSVG.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - stackedBarMargin.left)
+        .attr("x",0 - (stackedBarHeight / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Location");
+
+    // Add X axis labels
+    stackedBarSVG.append("text")
+        .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom) + ")")
+        .style("text-anchor", "middle")
+        .text("Value");
+
+    stackedBarSVG.append("text")
+        .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom + 20) + ")")
+        .style("text-anchor", "middle")
+        .text("Total Cases per Million");
+
+    stackedBarSVG.append("text")
+        .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom + 40) + ")")
+        .style("text-anchor", "middle")
+        .text("Total population_density");
+};
