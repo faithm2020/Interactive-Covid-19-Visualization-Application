@@ -52,7 +52,7 @@ d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/
         .data(limitedData)
         .enter().append("rect")
         .attr("class", "bar2")
-        .attr("x", d => xAxis(d.location) + xAxis.bandwidth() / 2)
+        .attr("x", d => xAxis(d.location) + xAxis.bandwidth() / 2 )
         .attr("width", xAxis.bandwidth() / 2)
         .attr("y", d => yAxisRight(d.people_fully_vaccinated))
         .attr("height", d => doubleBarHeight - yAxisRight(d.people_fully_vaccinated))
@@ -71,6 +71,7 @@ d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/
     doubleBarSVG.append("g")
         .attr("transform", "translate(" + doubleBarWidth + ", 0)")
         .call(d3.axisRight(yAxisRight));
+
 
     // Add X axis label
     doubleBarSVG.append("text")
