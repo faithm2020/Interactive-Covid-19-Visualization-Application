@@ -70,7 +70,9 @@ function doubleBarChart(data){
             .attr("width", xAxis.bandwidth() / 2)
             .attr("y", d => yAxisLeft(d.population_density))
             .attr("height", d => doubleBarHeight - yAxisLeft(d.population_density))
-            .attr("fill", "#FDD4A9");
+            .attr("fill", "#FDD4A9")
+            .append("title")
+            .text(d => `Location: ${d.location}\nPopulation_density: ${d.population_density}`);
 
         //Create bars for total cases
         doubleBarSVG.selectAll(".bar2")
@@ -81,7 +83,9 @@ function doubleBarChart(data){
             .attr("width", xAxis.bandwidth() / 2)
             .attr("y", d => yAxisRight(d.people_fully_vaccinated))
             .attr("height", d => doubleBarHeight - yAxisRight(d.people_fully_vaccinated))
-            .attr("fill", "#CF5F00");
+            .attr("fill", "#CF5F00")
+            .append("title")
+            .text(d => `Location: ${d.location}\nPeople_Fully_Vaccinated: ${d.people_fully_vaccinated}`);
     
         // Add the X Axis
         doubleBarSVG.append("g")
