@@ -3,6 +3,8 @@ const doubleBarMargin = {top: 25, right: 70, bottom: 40, left: 50};
 const doubleBarWidth = 600 - doubleBarMargin.left - doubleBarMargin.right;
 const doubleBarHeight = 400 - doubleBarMargin.top - doubleBarMargin.bottom;
 
+//function createDoubleBarChart(data){
+
 
 //to load the dataset from the provided document
 d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv").then(data => {

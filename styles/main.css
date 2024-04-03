@@ -16,16 +16,7 @@ body {
     background-color: #ffffff;
 }
 
-.visualisation-3 {
-    height: 100vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: relative;
-    background-color: #ffffff;
-}
-
-.visualisation-4 {
+.section-2 {
     height: 100vh;
     display: flex;
     justify-content: space-around;
