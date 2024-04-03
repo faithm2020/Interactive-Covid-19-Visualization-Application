@@ -26,6 +26,7 @@ d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/
     const worldData = mainData.filter(d => d.location === 'World');
     lineGraph(worldData);
     stackBarGraph(countryData);
+    doubleBarChart();
 });
 
 const mapPath = d3.geoPath();
