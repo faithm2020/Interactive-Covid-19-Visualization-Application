@@ -1,6 +1,6 @@
 //to set the dimensions and margins of the graph
-const doubleBarMargin = {top: 25, right: 70, bottom: 40, left: 50};
-const doubleBarWidth = 600 - doubleBarMargin.left - doubleBarMargin.right;
+const doubleBarMargin = {top: 25, right: 70, bottom: 40, left: 70};
+const doubleBarWidth = 700 - doubleBarMargin.left - doubleBarMargin.right;
 const doubleBarHeight = 400 - doubleBarMargin.top - doubleBarMargin.bottom;
 
 function doubleBarChart(data){
@@ -70,7 +70,7 @@ function doubleBarChart(data){
             .attr("width", xAxis.bandwidth() / 2)
             .attr("y", d => yAxisLeft(d.population_density))
             .attr("height", d => doubleBarHeight - yAxisLeft(d.population_density))
-            .attr("fill", "steelblue");
+            .attr("fill", "#FDD4A9");
 
         //Create bars for total cases
         doubleBarSVG.selectAll(".bar2")
@@ -81,7 +81,7 @@ function doubleBarChart(data){
             .attr("width", xAxis.bandwidth() / 2)
             .attr("y", d => yAxisRight(d.people_fully_vaccinated))
             .attr("height", d => doubleBarHeight - yAxisRight(d.people_fully_vaccinated))
-            .attr("fill", "orange");
+            .attr("fill", "#CF5F00");
     
         // Add the X Axis
         doubleBarSVG.append("g")
@@ -124,7 +124,7 @@ function doubleBarChart(data){
     }
     
     // Add event listener to the submit button
-    d3.select("#submitBtn").on("click", updateDoubleBarChart);
+    d3.select("#find-Btn").on("click", updateDoubleBarChart);
 
     // Initial graph creation
     updateDoubleBarChart();

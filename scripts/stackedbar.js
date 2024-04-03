@@ -1,6 +1,6 @@
 // Set dimensions and margins
-const stackedBarMargin = {top: 50, right: 70, bottom: 45, left: 120};
-const stackedBarWidth = 600 - stackedBarMargin.left - stackedBarMargin.right;
+const stackedBarMargin = {top: 50, right: 70, bottom: 45, left: 70};
+const stackedBarWidth = 700 - stackedBarMargin.left - stackedBarMargin.right;
 const stackedBarHeight = 400 - stackedBarMargin.top - stackedBarMargin.bottom;
 
 function stackBarGraph(data) {
@@ -38,7 +38,7 @@ function stackBarGraph(data) {
             .attr("y", d => yScale(d.location))
             .attr("width", d => xAxisTop(d.population_density))
             .attr("height", yScale.bandwidth())
-            .attr("fill", "steelblue")
+            .attr("fill", "#FDD4A9")
             .append("title")
             .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_deaths_per_million}`);
 
@@ -50,7 +50,7 @@ function stackBarGraph(data) {
             .attr("y", d => yScale(d.location))
             .attr("width", d => xAxisBottom(d.total_deaths_per_million))
             .attr("height", yScale.bandwidth())
-            .attr("fill", "orange")
+            .attr("fill", "#CF5F00")
             .append("title")
             .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_deaths_per_million}`);
 
