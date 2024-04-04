@@ -175,7 +175,7 @@ function barCharts(){
             .attr("y", 0 - doubleBarMargin.left)
             .attr("x", 0 - (doubleBarHeight / 2))
             .attr("dy", "1em")
-            .attr("fill", "#FDD4A9")
+            .attr("fill", "#CFAE8A")
             .style("text-anchor", "middle")
             .text("Total Population Density →");
     
@@ -330,14 +330,14 @@ function barCharts(){
 
         // Add X axis labels
         stackedBarSVG.append("text")
-            .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom - 5) + ")")
-            .attr("fill", "#CF5F00")
+            .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom) + ")")
+            .attr("fill", "#CFAE8A0")
             .style("text-anchor", "middle")
             .text("Total cases per million");
 
         stackedBarSVG.append("text")
             .attr("transform", "translate(" + (stackedBarWidth / 2 ) + "," + (stackedBarMargin.top - 80) + ")")
-            .attr("fill", "#FDD4A9")
+            .attr("fill", "#DBB892")
             .style("text-anchor", "middle")
             .text("Total population density");
     }
