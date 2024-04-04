@@ -1,4 +1,4 @@
-# F20DV Group 12 COVID-19 DATA VISUALIZATION Project
+# F20DV GROUP 12 COVID-19 DATA VISUALIZATION PROJECT
 
 This project aims to visualize COVID-19 data using D3.js library. It includes visualizations such as a line graph, double bar chart, stacked bar chart, and a world map showing COVID-19 cases and deaths per million population.
 
@@ -33,7 +33,7 @@ This project aims to visualize COVID-19 data using D3.js library. It includes vi
 
 ## Contributors
 
-- [Favour Ozogbu](https://github.com/favourozogbu)(https://gitlab-student.macs.hw.ac.uk/fso2000)
+- [Favour Ozogbu](https://gitlab-student.macs.hw.ac.uk/fso2000)[Github](https://github.com/favourozogbu)
 - [Artho Das](https://gitlab-student.macs.hw.ac.uk/and2002)
 - [Faith Muraino](https://gitlab-student.macs.hw.ac.uk/fm2020)
 - [Sheikh Mohammed](https://gitlab-student.macs.hw.ac.uk/sm2207)
