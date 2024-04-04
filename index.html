@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the web page -->
     <title>COVID-19 DATA VISUALIZATION</title>
 
+    <!-- External libraries and stylesheets -->
     <script src="lib/d3/d3.v7.min.js"></script>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+    <!-- Page title -->
     <div class="page-title">
         <h2>THE IMPACT OF COVID-19 AROUND THE WORLD</h2>
     </div>
 
-    <section class="section-1">  
+    <!-- First section of the page -->
+    <section class="section-1"> 
+        <!-- Map visualization --> 
         <div class="map">
+            <!-- Dropdown for selecting data metric -->
             <select id="data-select">
                 <option value="cases">Cases</option>
                 <option value="deaths">Deaths</option>
             </select>
+            <!-- Container for the map visualization -->
             <div id="map-viz">
             </div>
+            <!-- Description of the map -->
             <p class="map-bottom">The World map showcases the severity of Covid-19 cases & deaths by country. <br>The darker the colour, the higher the cases or deaths per million.</p>
-        </div>
+        </div>  
 
+        <!-- Container for search input and line chart -->
         <div class="sub-section-right">
+            <!-- Search input for filtering data -->
             <div class="search-container">
                 <input type="text" id="country-input" placeholder="Enter country name...">
                 <button id="search-btn">Search</button>
             </div>
+            <!-- Container for line chart -->
             <div id="line-viz"></div>
         </div>
     </section>
 
+    <!-- Second section of the page -->
     <section class="section-2">
+        <!-- Container for checkboxes and find button -->
         <div class="checkbox">
             <div class="checkboxes" id="countryCheckboxes"></div>
             <button id="find-Btn">Find</button>
         </div> 
+        <!-- Container for bar charts -->
         <div class="visualizations">
+            <!-- Container for double bar chart -->
             <div class="visualisation-4">
                 <div id="double-bar"></div>
             </div>
             <br><br>
+            <!-- Container for stacked bar chart -->
             <div class="visualisation-3">
                 <div id="chart-container"></div>       
             </div>
@@ -50,8 +67,8 @@
     </section>
 
 
-
     <div id="app"></div>
+    <!-- Script files for data visualization -->
     <script src="scripts/barcharts.js"></script>
     <script src="scripts/map.js"></script>
     <script src="scripts/line.js"></script>

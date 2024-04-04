@@ -1,131 +1,155 @@
+/* Global styling */
 *{
-    color: #222;
-    font-family: Lato;
+    color: #222; /* Text color */
+    font-family: Lato;  /* Font family */
 }
 
+/* Body styling */
 body {
-    background-color: rgb(255, 237, 212);
+    background-color: rgb(255, 237, 212);   /* Background color */
 }
 
+/* Page title styling */
 .page-title {
     display: flex;
-    justify-content: center;
+    justify-content: center;    /* Center align */
   }
 
-.section-1 {
-    height: 100vh;
+/* Map description styling */
+.map-bottom {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: center;    /* Center align */
+}
+
+/* First section styling */
+.section-1 {
+    height: 100vh;  /* Full viewport height */
+    display: flex;
+    justify-content: space-around;  /* Space around elements */
+    align-items: center;    /* Center align vertically */
     position: relative;
-    background-color: #fafafa;
+    background-color: #fafafa;  /* Background color */
     border-radius: 15px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
     margin:5px; /* Adjust spacing between sections */
 }
 
+/* Map container styling */
 .map {
-    background-color: #ffffff;
+    background-color: #ffffff;  /* Background color */
     border-radius: 15px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
 }
 
+/* Right sub-section styling */
 .sub-section-right {
-    background-color: #ffffff;
+    background-color: #ffffff;  /* Background color */
     border-radius: 15px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
 
 }
 
+/* Second section styling */
 .section-2 {
-    height: 100vh;
+    height: 100vh;  /* Full viewport height */
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-around;  /* Space around elements */
+    align-items: center;    /* Center align vertically */
     position: relative;
-    background-color: #fafafa;
+    background-color: #fafafa;  /* Background color */
     border-radius: 15px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
     margin: 20px; /* Adjust spacing between sections */
 }
 
+/* Checkbox container styling */
 .checkbox {
-    background-color: #ffffff;
+    background-color: #ffffff; /* Background color */
     border-radius: 15px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
 
 }
 
-
-
+/* Select dropdown styling */
 #data-select {
     width: 200px;
     padding: 10px;
     font-size: 12px;
     border-radius: 10px;
-    border: 2px solid #ccc;
-    background-color: #fff;
-    color: #333;
-    text-align: center;
+    border: 2px solid #ccc; /* Border */
+    background-color: #fff; /* Background color */
+    color: #333;    /* Text color */
+    text-align: center; /* Center align text */
 }
 
+/* Option styling for select dropdown */
 #data-select option {
     padding: 10px;
     font-size: 12px;
     border-radius: 10px;
-    background-color: #fff;
-    color: #333;
-    text-align: center;
+    background-color: #fff; /* Background color */
+    color: #333;    /* Text color */
+    text-align: center; /* Center align text */
 }
 
+/* Hover effect for select dropdown */
 #data-select:hover {
-    border-color: #007bff;
-    text-align: center;
+    border-color: #007bff;  /* Border color on hover */
+    text-align: center; /* Center align text */
 }
 
+/* Focus effect for select dropdown */
 #data-select:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px #007bff;
-    text-align: center;
+    outline: none;  /* Remove outline */
+    border-color: #007bff;  /* Border color on focus */
+    box-shadow: 0 0 5px #007bff;    /* Shadow on focus */
+    text-align: center; /* Center align text */
 }
 
+/* Search container styling */
 .search-container {
-    margin-bottom: 20px;
+    margin-bottom: 20px;    /* Adjust bottom margin */
 }
+
+/* Search input styling */
 .search-container input[type="text"] {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /* Border */
 }
+
+/* Search button styling */
 .search-container button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    background-color: #007bff;  /* Background color */
+    color: #fff;    /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
 }
 
+/* Checkbox container styling */
 .checkboxes {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    height: 600px; /* Adjust the height to fit your needs */
-    width: 400px;
+    overflow-y: auto; /* Vertical scrollbar when needed */
+    height: 600px; /* Adjust the height */
+    width: 400px; /* Width */
     margin-bottom: 10px; /* Adjust spacing between checkboxes */
 }
 
+/* Individual checkbox styling */
 .checkbox {
     margin-bottom: 10px; /* Adjust spacing between checkboxes */
 }
 
+/* Styling for find button */
 #find-Btn {
     padding: 10px 20px;
     font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
 }
