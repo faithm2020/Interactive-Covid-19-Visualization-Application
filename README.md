@@ -15,7 +15,7 @@ This project aims to visualize COVID-19 data using D3.js library. It includes vi
 ## Installation
 
 1. Clone the repository: `git clone <https://gitlab-student.macs.hw.ac.uk/fso2000/f20dv-group-project>`
-2. Navigate to the project directory: `cd f20dv-group-project`
+2. Navigate to the project directory: `cd f20dv-group-project-main`
 3. Open `index.html` in your web browser to view the visualizations.
 
 ## Usage
