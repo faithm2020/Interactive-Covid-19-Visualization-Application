@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 237, 212);
 }
 
 .section-1 {
@@ -13,7 +13,23 @@ body {
     justify-content: space-around;
     align-items: center;
     position: relative;
+    background-color: #fafafa;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    margin:5px; /* Adjust spacing between sections */
+}
+
+.map {
     background-color: #ffffff;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+}
+
+.sub-section-right {
+    background-color: #ffffff;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+
 }
 
 .section-2 {
@@ -22,8 +38,20 @@ body {
     justify-content: space-around;
     align-items: center;
     position: relative;
-    background-color: #ffffff;
+    background-color: #fafafa;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    margin: 20px; /* Adjust spacing between sections */
 }
+
+.checkbox {
+    background-color: #ffffff;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+
+}
+
+
 
 #data-select {
     width: 200px;
