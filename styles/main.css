@@ -1,11 +1,16 @@
 *{
     color: #222;
-    font-family: sans-serif;
+    font-family: Lato;
 }
 
 body {
     background-color: rgb(255, 237, 212);
 }
+
+.page-title {
+    display: flex;
+    justify-content: center;
+  }
 
 .section-1 {
     height: 100vh;

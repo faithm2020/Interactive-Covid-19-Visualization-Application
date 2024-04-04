@@ -1,14 +1,14 @@
 //to set the dimensions and margins of the graph
-const doubleBarMargin = {top: 25, right: 85, bottom: 40, left: 70};
+const doubleBarMargin = {top: 25, right: 85, bottom: 45, left: 70};
 const doubleBarWidth = 700 - doubleBarMargin.left - doubleBarMargin.right;
 const doubleBarHeight = 350 - doubleBarMargin.top - doubleBarMargin.bottom;
 
-const stackedBarMargin = {top: 50, right: 70, bottom: 45, left: 70};
+const stackedBarMargin = {top: 50, right: 70, bottom: 45, left: 90};
 const stackedBarWidth = 700 - stackedBarMargin.left - stackedBarMargin.right;
 const stackedBarHeight = 350 - stackedBarMargin.top - stackedBarMargin.bottom;
 
 
-const defaultSelectedCountries = ["United States", "India", "Brazil","United Kingdom"];
+const defaultSelectedCountries = ["United States", "Belgium", "Brazil","United Kingdom"];
 
 function barCharts(){
     //to load the dataset from the provided document
@@ -34,20 +34,46 @@ function barCharts(){
             .attr("for", location)
             .text(location);
     });
-    //
-    //
-    //
-    //
+  
     //
     //
     // ------- CODE FOR THE DOUBLE BAR CHART
     //
     //
-    //
-    //
-    //
-    //
-    //
+    // Append tooltip div
+    const doubleBarTooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+        .style("position", "absolute")
+        .style("pointer-events", "none")
+        .style("background-color", "white")
+        .style("padding", "5px")
+        .style("border", "1px solid #ddd")
+        .style("box-shadow", "0 0 5px rgba(0, 0, 0, 0.1)");
+
+    // Function to show tooltip
+    function showTooltipDoubleBar(event, d) {
+        const tooltipWidth = parseFloat(doubleBarTooltip.style("width"));
+        const tooltipHeight = parseFloat(doubleBarTooltip.style("height"));
+        const mouseX = event.pageX;
+        const mouseY = event.pageY;
+
+        doubleBarTooltip.transition()
+            .duration(200)
+            .style("opacity", .9)
+            .style("left", (mouseX + 10) + "px")
+            .style("top", (mouseY - tooltipHeight - 10) + "px");
+
+        doubleBarTooltip.html(`Location: ${d.location}<br>Population Density: ${d.population_density}<br>People Fully Vaccinated: ${d.people_fully_vaccinated}`);
+    }
+
+    // Function to hide tooltip
+    function hideTooltipDoubleBar() {
+        doubleBarTooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+    }
+
     function updateDoubleBarChart() {
         const selectedCountries = [];
         d3.selectAll("input[type=checkbox]:checked").each(function() {
@@ -93,6 +119,8 @@ function barCharts(){
             .attr("y", doubleBarHeight) // Initial position at the bottom
             .attr("height", 0) // Initial height of 0
             .attr("fill", "#FDD4A9")
+            .on("mouseover", showTooltipDoubleBar)
+            .on("mouseout", hideTooltipDoubleBar)
             .merge(doubleBarSVG.selectAll(".bar1")) // Merge new and existing elements
             .transition() // Apply transition
             .duration(500) // Animation duration
@@ -111,6 +139,8 @@ function barCharts(){
             .attr("y", doubleBarHeight) // Initial position at the bottom
             .attr("height", 0) // Initial height of 0
             .attr("fill", "#CF5F00")
+            .on("mouseover", showTooltipDoubleBar)
+            .on("mouseout", hideTooltipDoubleBar)
             .merge(doubleBarSVG.selectAll(".bar2")) // Merge new and existing elements
             .transition() // Apply transition
             .duration(500) // Animation duration
@@ -135,7 +165,7 @@ function barCharts(){
     
         // Add X axis label
         doubleBarSVG.append("text")
-            .attr("transform", "translate(" + (doubleBarWidth / 2) + "," + (doubleBarHeight + doubleBarMargin.bottom) + ")")
+            .attr("transform", "translate(" + (doubleBarWidth / 2) + "," + (doubleBarHeight + doubleBarMargin.bottom - 5) + ")")
             .style("text-anchor", "middle")
             .text("Countries");
     
@@ -162,18 +192,43 @@ function barCharts(){
     
     //
     //
-    //
-    //
-    //
-    //
     // ------- CODE FOR THE STACKED BAR CHART
     //
     //
-    //
-    //
-    //
-    //
-    //
+    
+    // Append tooltip div
+    const stackedBarTooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+        .style("position", "absolute")
+        .style("pointer-events", "none")
+        .style("background-color", "white")
+        .style("padding", "5px")
+        .style("border", "1px solid #ddd")
+        .style("box-shadow", "0 0 5px rgba(0, 0, 0, 0.1)");
+
+    // Function to show tooltip
+    function showTooltipStackedBar(event, d) {
+        const tooltipWidth = parseFloat(stackedBarTooltip.style("width"));
+        const tooltipHeight = parseFloat(stackedBarTooltip.style("height"));
+        const mouseX = event.pageX;
+        const mouseY = event.pageY;
+    
+        stackedBarTooltip.transition()
+            .duration(200)
+            .style("opacity", .9)
+            .style("left", (mouseX + 10) + "px")
+            .style("top", (mouseY - tooltipHeight - 10) + "px");
+    
+        stackedBarTooltip.html(`Location: ${d.location}<br>Population Density: ${d.population_density}<br>Total Cases per Million: ${d.total_cases_per_million}`);
+    }
+
+    // Function to hide tooltip
+    function hideTooltipStackedBar() {
+        stackedBarTooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+    }
 
     function updateStackedBarChart() {
 
@@ -205,28 +260,10 @@ function barCharts(){
             .range([0, stackedBarWidth]);
 
         const xAxisBottom = d3.scaleLinear()
-            .domain([0, d3.max(filteredData, d => d.total_deaths_per_million)])
+            .domain([0, d3.max(filteredData, d => d.total_cases_per_million)])
             .range([0, stackedBarWidth]);
             
         // Create stacked bars
-        stackedBarSVG.selectAll(".stacked-bar-total-population_density")
-            .data(filteredData)
-            .enter().append("rect")
-            .attr("class", "stacked-bar-total-population_density")
-            .attr("x", 0)
-            .attr("y", d => stackedBarHeight) // Initial position at the bottom
-            .attr("width", 0) // Initial width of 0
-            .attr("height", yScale.bandwidth())
-            .attr("fill", "#FDD4A9")
-            .merge(stackedBarSVG.selectAll(".stacked-bar-total-population_density")) // Merge new and existing elements
-            .transition() // Apply transition
-            .duration(500) // Animation duration
-            .attr("x", 0)
-            .attr("width", d => xAxisTop(d.population_density))
-            .attr("y", d => yScale(d.location))
-            .select("title")
-            .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_deaths_per_million}`);
-
         stackedBarSVG.selectAll(".stacked-bar-total-cases-per-million")
             .data(filteredData)
             .enter().append("rect")
@@ -236,14 +273,38 @@ function barCharts(){
             .attr("width", 0) // Initial width of 0
             .attr("height", yScale.bandwidth())
             .attr("fill", "#CF5F00")
+            .on("mouseover", showTooltipStackedBar)
+            .on("mouseout", hideTooltipStackedBar)
             .merge(stackedBarSVG.selectAll(".stacked-bar-total-cases-per-million")) // Merge new and existing elements
             .transition() // Apply transition
             .duration(500) // Animation duration
             .attr("x", 0)
-            .attr("width", d => xAxisBottom(d.total_deaths_per_million))
+            .attr("width", d => xAxisBottom(d.total_cases_per_million))
             .attr("y", d => yScale(d.location))
             .select("title")
-            .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_deaths_per_million}`);
+            .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_cases_per_million}`);
+
+        stackedBarSVG.selectAll(".stacked-bar-total-population_density")
+            .data(filteredData)
+            .enter().append("rect")
+            .attr("class", "stacked-bar-total-population_density")
+            .attr("x", 0)
+            .attr("y", d => stackedBarHeight) // Initial position at the bottom
+            .attr("width", 0) // Initial width of 0
+            .attr("height", yScale.bandwidth())
+            .attr("fill", "#FDD4A9")
+            .on("mouseover", showTooltipStackedBar)
+            .on("mouseout", hideTooltipStackedBar)
+            .merge(stackedBarSVG.selectAll(".stacked-bar-total-population_density")) // Merge new and existing elements
+            .transition() // Apply transition
+            .duration(500) // Animation duration
+            .attr("x", 0)
+            .attr("width", d => xAxisTop(d.population_density))
+            .attr("y", d => yScale(d.location))
+            .select("title")
+            .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_cases_per_million}`);
+
+        
 
         // Add axes and labels
         stackedBarSVG.append("g")
@@ -261,15 +322,15 @@ function barCharts(){
         stackedBarSVG.append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", 0 - stackedBarMargin.left)
-            .attr("x",0 - (stackedBarHeight / 2))
+            .attr("x",0 - (stackedBarHeight / 2 - 20))
             .attr("dy", "1em")
             
             .style("text-anchor", "middle")
-            .text("Country");
+            .text("Countries");
 
         // Add X axis labels
         stackedBarSVG.append("text")
-            .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom) + ")")
+            .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom - 5) + ")")
             .attr("fill", "#CF5F00")
             .style("text-anchor", "middle")
             .text("Total cases per million");

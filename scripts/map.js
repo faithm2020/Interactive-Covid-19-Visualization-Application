@@ -59,11 +59,6 @@ function updateMap(selectedData){
         domainValues = [0,100,200,500,1000,2000,3000,5000];
         rangeValues = d3.schemeReds[9]
         break;
-    case 'vaccines':
-        domainValues = [0, 10, 20, 50,100,200,300,500];
-        rangeValues = d3.schemeBlues[9]
-        // Adjust your data processing logic for vaccines
-        break;
     default:
         domainValues = [0, 1000, 10000, 50000, 100000, 200000, 300000, 500000];
         rangeValues = d3.schemeOranges[9]
@@ -83,10 +78,6 @@ function updateMap(selectedData){
             case 'deaths':
                 data.set(d.iso_code, d.total_deaths_per_million);
                 arr.push(d.total_deaths_per_million);
-                break;
-            case 'vaccines':
-                data.set(d.iso_code, d.total_vaccinations_per_hundred);
-                arr.push(d.total_vaccinations_per_hundred);
                 break;
             default:
                 data.set(d.iso_code, d.total_cases_per_million); // Default to cases
