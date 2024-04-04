@@ -1,7 +1,8 @@
+// Define the dimensions of the map visualization
 const mapWidth = 52;
 const mapHeight = 80;
 
-  // The svg
+// Create an SVG element for the map visualization
 const mapSvg = d3.select("#map-viz")
             .append("svg")
             .attr("class", "map-svg")
@@ -12,42 +13,45 @@ const mapSvg = d3.select("#map-viz")
 // geoEquirectangular()
 // geoMercerator()
 // geoEqualEarth()
-// Map and projection
 
+// Define initial variables
 let mainData;
 let countryData;
 
+// Load dataset from the provided URL
 d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv").then(data => {
 
+    // Store the loaded data    
     mainData = data;
+    // Filter data based on specific date and countries
     countryData = data.filter(d => d.date === "2023-03-07" && ['AFG','ALB','DZA','ASM','CAN'].includes(d.iso_code));
 
     // Initial call for world data
     const worldData = mainData.filter(d => d.location === 'World');
+    // Call the lineGraph function with worldData
     lineGraph(worldData);
-    //checkBox();
-    // stackBarGraph();
-   // doubleBarChart();
 });
 
+// Define map projection and path
 const mapPath = d3.geoPath();
 const projection = d3.geoMercator()
   .scale(100)
   .center([0,20])
   .translate([ window.innerWidth * mapWidth / 200 , window.innerHeight * mapHeight / 200]);
 
-  // Data and color scale
+// Define data and color scale
 const data = new Map();
 const colorScale = d3.scaleThreshold()
   .domain([0, 1000, 10000, 50000, 100000, 200000, 300000, 500000])
   .range(d3.schemeOranges[9]);
-// .domain([10000, 100000, 500000, 1000000, 5000000, 10000000, 20000000, 50000000])
 
 const selectedData = 'cases';
 
 let arr = [];
-// Load external data and boot
+
+// Function to update the map based on selected data
 function updateMap(selectedData){
+    // Define domain and range values based on selected data
     let domainValues;
     let rangeValues;
     switch(selectedData) {
@@ -64,8 +68,11 @@ function updateMap(selectedData){
         rangeValues = d3.schemeOranges[9]
     }
 
+    // Set the domain and range of the color scale
     colorScale.domain(domainValues);
     colorScale.range(rangeValues);
+
+    // Load external JSON and CSV data
     Promise.all([
     d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
     d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv",function (d) {
@@ -88,9 +95,7 @@ function updateMap(selectedData){
     .then(function(loadData) {
         let topo = loadData[0];
 
-        // filter antartica out of map
-        //topo.features = topo.features.filter(d => d.id !== 'ANT')
-
+        // Define mouse event handlers
         let mouseOver = function(event, d) {
             mapTooltip.style("opacity", 1);
             d3.selectAll(".Country")
@@ -149,7 +154,6 @@ function updateMap(selectedData){
         .style("border-radius", "5px")
         .style("padding", "0.3em");
 
-
         // Draw the map
         mapSvg.append("g")
         .selectAll("path")
@@ -176,18 +180,14 @@ function updateMap(selectedData){
     });
 }
 
+// Initial call to update the map with selected data
 updateMap(selectedData);
 
+// Event listener for selecting different data
 document.getElementById("data-select").addEventListener("change", function() {
     let selectedData = this.value;
     // Call the loadData function with the newly selected data
     updateMap(selectedData);
   });
-//   document.getElementById("search-btn").addEventListener("click", function() {
-//     // Get the input value
-//     let countryName = document.getElementById("country-input").value;
-//     const filteredData = mainData.filter(d => d.location.toLowerCase() === countryName);
-//     // Call the lineGraph function with the entered country name
-//     lineGraph(filteredData);
-// });
+
   

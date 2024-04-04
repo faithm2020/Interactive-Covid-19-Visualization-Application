@@ -3,19 +3,29 @@ const lineMargin = { top: 35, right: 30, bottom: 80, left: 80 };
 const lineWidth = 620 - lineMargin.left - lineMargin.right;
 const lineHeight = 400 - lineMargin.top - lineMargin.bottom;
 
+// Function to generate a line graph based on the provided data.
+// It creates an SVG element and appends it to the HTML with the ID 'line-viz'.
+// The graph displays the growth of Covid-19 cases and deaths over time for a specific country.
+// @param data: The dataset containing Covid-19 data for a specific country.
+//              Each data point should include information about the date, total cases, total deaths, and location.
+//              The date should be in the format 'YYYY-MM-DD'
 function lineGraph(data) {
+    // Remove any existing line graph
     d3.select(".line-svg").remove();
 
+    // Redefine margin and dimensions for the graph
     const lineMargin = { top: 35, right: 80, bottom: 80, left: 80 };
     const lineWidth = 620 - lineMargin.left - lineMargin.right;
     const lineHeight = 400 - lineMargin.top - lineMargin.bottom;
 
+    // Parse timestamps from the data
     const timeStamps = data.map(d => d3.timeParse("%Y-%m-%d")(d.date));
     const domain = d3.extent(timeStamps);
 
     // filter the latest data out as it has bugs
     data = data.filter(d => d3.timeParse("%Y-%m-%d")(d.date) < d3.timeParse("%Y-%m-%d")("2024-03-03"));
 
+    // Define X scale for time
     const x = d3.scaleTime().domain(domain).range([0, lineWidth]);
 
     // Y-scale for total cases
@@ -122,29 +132,9 @@ function lineGraph(data) {
         .text(() => {
             return "Growth of Covid-19 cases & deaths overtime: " + data[0].location;
         });
-
-    //Country search 
-    // const searchContainer = d3.select("#line-viz")
-    // .append("div")
-    // .attr("class", "search-container");
-
-    // searchContainer.append("input")
-    //     .attr("type", "text")
-    //     .attr("placeholder", "Enter country name...")
-    //     .attr("id", "country-input");
-
-    // searchContainer.append("button")
-    //     .text("Search")
-    //     .on("click", function() {
-    //         const countryName = d3.select("#country-input").property("value").toLowerCase();
-    //         const filteredData = mainData.filter(d => d.location.toLowerCase() === countryName);
-    //         lineGraph(filteredData);
-    //     });
 }
-// Initial call for world data
-//const worldData = mainData.filter(d => d.location === 'World');
-//lineGraph(worldData);
 
+// Event listener for search button
 document.getElementById("search-btn").addEventListener("click", function() {
     // Get the input value
     let countryName = document.getElementById("country-input").value;

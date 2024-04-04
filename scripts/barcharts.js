@@ -1,25 +1,25 @@
-//to set the dimensions and margins of the graph
+// Define dimensions and margins for the double bar chart
 const doubleBarMargin = {top: 25, right: 85, bottom: 45, left: 70};
 const doubleBarWidth = 700 - doubleBarMargin.left - doubleBarMargin.right;
 const doubleBarHeight = 350 - doubleBarMargin.top - doubleBarMargin.bottom;
 
+// Define dimensions and margins for the stacked bar chart
 const stackedBarMargin = {top: 50, right: 70, bottom: 45, left: 90};
 const stackedBarWidth = 700 - stackedBarMargin.left - stackedBarMargin.right;
 const stackedBarHeight = 350 - stackedBarMargin.top - stackedBarMargin.bottom;
 
-
+// default countries to be displayed
 const defaultSelectedCountries = ["United States", "Belgium", "Brazil","United Kingdom"];
 
+// Function to generate double and stacked bar charts based on Covid-19 data.
+// It loads the dataset from the provided URL, creates checkboxes for each country,
+// and initializes both the double and stacked bar charts.
 function barCharts(){
     //to load the dataset from the provided document
     d3.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv").then(data => {
 
-    // Check box connected to both of the graphs
-
+    // Get unique locations (countries)
     const uniqueLocations = Array.from(new Set(data.map(d => d.location)));
-        //uniqueLocations.splice(1, 1); // Remove the second element
-        //uniqueLocations.splice(3, 1); // Remove the fifth element
-        //const limitedData = data.filter(d => uniqueLocations.includes(d.location));
     
     // Create checkboxes for each country
     const checkboxesDiv = d3.select("#countryCheckboxes");
@@ -40,6 +40,7 @@ function barCharts(){
     // ------- CODE FOR THE DOUBLE BAR CHART
     //
     //
+
     // Append tooltip div
     const doubleBarTooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
@@ -74,6 +75,7 @@ function barCharts(){
             .style("opacity", 0);
     }
 
+    // Function to update the double bar chart
     function updateDoubleBarChart() {
         const selectedCountries = [];
         d3.selectAll("input[type=checkbox]:checked").each(function() {
@@ -93,6 +95,7 @@ function barCharts(){
             .append("g")
             .attr("transform", "translate(" + doubleBarMargin.left + "," + doubleBarMargin.top + ")");
     
+        // Define scales for axes
         //add x-axis for location(countries)
         const xAxis = d3.scaleBand()
             .domain(filteredData.map(d => d.location))
@@ -148,7 +151,8 @@ function barCharts(){
             .attr("height", d => doubleBarHeight - yAxisRight(d.people_fully_vaccinated))
             .select("title")
             .text(d => `Location: ${d.location}\nPeople_Fully_Vaccinated: ${d.people_fully_vaccinated}`);
-    
+        
+        // Add axes and labels
         // Add the X Axis
         doubleBarSVG.append("g")
             .attr("transform", "translate(0," + doubleBarHeight + ")")
@@ -230,8 +234,8 @@ function barCharts(){
             .style("opacity", 0);
     }
 
+    // Function to update the stacked bar chart
     function updateStackedBarChart() {
-
         const selectedCountries = [];
         d3.selectAll("input[type=checkbox]:checked").each(function() {
             selectedCountries.push(this.value);
@@ -263,7 +267,7 @@ function barCharts(){
             .domain([0, d3.max(filteredData, d => d.total_cases_per_million)])
             .range([0, stackedBarWidth]);
             
-        // Create stacked bars
+        // Create bar for total cases per million
         stackedBarSVG.selectAll(".stacked-bar-total-cases-per-million")
             .data(filteredData)
             .enter().append("rect")
@@ -283,7 +287,8 @@ function barCharts(){
             .attr("y", d => yScale(d.location))
             .select("title")
             .text(d => `Location: ${d.location}\nTotal population_density: ${d.population_density}\nTotal Cases per Million: ${d.total_cases_per_million}`);
-
+        
+        // Create bar for total population desnity
         stackedBarSVG.selectAll(".stacked-bar-total-population_density")
             .data(filteredData)
             .enter().append("rect")
@@ -360,13 +365,13 @@ function barCharts(){
 
     // Assign the updateCharts function to the click event handler of the button
     d3.select("#find-Btn").on("click", updateCharts);
-
+    // Trigger the click event programmatically
     d3.select("#find-Btn").dispatch("click");
 
     })
 
 }
-
+// Call the barCharts function to initialize the charts
 barCharts(); 
 
 
