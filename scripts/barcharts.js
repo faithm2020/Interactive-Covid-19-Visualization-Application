@@ -330,7 +330,7 @@ function barCharts(){
 
         // Add X axis labels
         stackedBarSVG.append("text")
-            .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom) + ")")
+            .attr("transform", "translate(" + (stackedBarWidth / 2) + "," + (stackedBarHeight + stackedBarMargin.bottom - 5) + ")")
             .attr("fill", "#CFAE8A0")
             .style("text-anchor", "middle")
             .text("Total cases per million");
