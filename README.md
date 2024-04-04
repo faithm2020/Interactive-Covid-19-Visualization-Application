@@ -33,7 +33,7 @@ This project aims to visualize COVID-19 data using D3.js library. It includes vi
 
 ## Contributors
 
-- [Favour Ozogbu](https://gitlab-student.macs.hw.ac.uk/fso2000)[Github](https://github.com/favourozogbu)
+- [Favour Ozogbu](https://gitlab-student.macs.hw.ac.uk/fso2000) ([Github])(https://github.com/favourozogbu)
 - [Artho Das](https://gitlab-student.macs.hw.ac.uk/and2002)
 - [Faith Muraino](https://gitlab-student.macs.hw.ac.uk/fm2020)
 - [Sheikh Mohammed](https://gitlab-student.macs.hw.ac.uk/sm2207)
