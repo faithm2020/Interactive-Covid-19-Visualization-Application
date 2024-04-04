@@ -1,6 +1,6 @@
 # F20DV GROUP 12 COVID-19 DATA VISUALIZATION PROJECT
 
-This project aims to visualize COVID-19 data using D3.js library. It includes visualizations such as a line graph, double bar chart, stacked bar chart, and a world map showing COVID-19 cases and deaths per million population.
+This project aims to visualize COVID-19 data using D3.js library. It includes visualizations such as a line graph, double bar chart, stacked bar chart, and a world map, showcasing various COVID-19 statistics. This data visualization aims to provide comprehensive information about covid-19, to support further research, and to update the public. 
 
 ## Features
 
