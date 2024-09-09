@@ -68,8 +68,8 @@ Provides interactivity for searching and displaying data for a specific country.
 ## Contributors
 
 - [Favour Ozogbu](https://gitlab-student.macs.hw.ac.uk/fso2000) (https://github.com/favourozogbu)
-- [Artho Das](https://gitlab-student.macs.hw.ac.uk/and2002)
 - [Faith Muraino](https://gitlab-student.macs.hw.ac.uk/fm2020) (https://github.com/faithm2020)  
+- [Artho Das](https://gitlab-student.macs.hw.ac.uk/and2002)
 - [Sheikh Mohammed](https://gitlab-student.macs.hw.ac.uk/sm2207)
 
 ## License
